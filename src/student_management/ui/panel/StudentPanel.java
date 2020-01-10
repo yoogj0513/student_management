@@ -1,16 +1,15 @@
 package student_management.ui.panel;
 
-import javax.swing.JPanel;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import student_management.dto.Student;
 
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-public class StudentPanel extends JPanel {
+public class StudentPanel extends AbsItemPanel<Student> {
 	private JLabel lblStdNo;
 	private JTextField tfStdNo;
 	private JLabel lblStdName;
@@ -74,7 +73,16 @@ public class StudentPanel extends JPanel {
 		tfEng.setColumns(10);
 	}
 	
-	public Student getStudent() {
+	@Override
+	public void clearTf() {
+		tfStdNo.setText("");
+		tfStdName.setText("");
+		tfKor.setText("");
+		tfMath.setText("");
+		tfEng.setText("");
+	}
+	@Override
+	public Student getItem() {
 		int stdNo = Integer.parseInt(tfStdNo.getText().trim());
 		String stdName = tfStdName.getText().trim();
 		int kor = Integer.parseInt(tfKor.getText().trim());
@@ -83,20 +91,12 @@ public class StudentPanel extends JPanel {
 		Student std = new Student(stdNo, stdName, kor, math, eng);
 		return std;
 	}
-	
-	public void setStudent(Student std) {
-		tfStdNo.setText(std.getStdNo()+"");
-		tfStdName.setText(std.getStdName());
-		tfKor.setText(std.getKor()+"");
-		tfMath.setText(std.getKor()+"");
-		tfEng.setText(std.getEng()+"");
-	}
-	
-	public void clearTf() {
-		tfStdNo.setText("");
-		tfStdName.setText("");
-		tfKor.setText("");
-		tfMath.setText("");
-		tfEng.setText("");
+	@Override
+	public void setItem(Student item) {
+		tfStdNo.setText(item.getStdNo()+"");
+		tfStdName.setText(item.getStdName());
+		tfKor.setText(item.getKor()+"");
+		tfMath.setText(item.getKor()+"");
+		tfEng.setText(item.getEng()+"");
 	}
 }
